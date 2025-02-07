@@ -33,7 +33,7 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="absolute w-screen px-8 py-5 bg-gradient-to-b from-black to-transparent z-10 flex justify-between">
+    <div className="absolute w-screen px-8 py-5 bg-gradient-to-b from-black to-transparent z-20 flex justify-between">
       <img className="w-48" src={LOGO} alt="logo" />
       {user && (
         <button
