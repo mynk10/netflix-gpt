@@ -4,11 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addUser, removeUser } from "../utils/userSlice";
 import { LOGO } from "../utils/constants";
+import { toggleGptSearchView } from "../utils/gptSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((appStore) => appStore.user);
+  const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
+
   const handleSignOut = () => {
     const auth = getAuth();
     signOut(auth)
@@ -17,6 +20,11 @@ const Header = () => {
         navigate("/error");
       });
   };
+  const handleGptSearchClick = () => {
+    // toggle gpt search
+    dispatch(toggleGptSearchView());
+  };
+
   useEffect(() => {
     const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -33,15 +41,15 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="absolute w-screen px-8 py-5 bg-gradient-to-b from-black to-transparent z-20 flex justify-between">
+    <div className="absolute w-screen px-5 py-5 bg-gradient-to-b from-black to-transparent z-20 flex justify-between">
       <img className="w-48" src={LOGO} alt="logo" />
       {user && (
-        <button
-          onClick={handleSignOut}
-          className="text-white font-bold text-lg"
-        >
-          Sign Out
-        </button>
+        <div className="text-white font-bold text-lg flex space-x-10">
+          <button onClick={handleGptSearchClick}>
+            {showGptSearch ? "Home Page" : "GPT Search"}
+          </button>
+          <button onClick={handleSignOut}>Sign Out</button>
+        </div>
       )}
     </div>
   );
