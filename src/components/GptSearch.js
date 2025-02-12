@@ -5,8 +5,8 @@ import GptMovieSuggestions from "./GptMovieSuggestions";
 
 const GptSearch = () => {
   return (
-    <div>
-      <img src={BACKGROUND} alt="background" className="fixed -z-10" />
+    <div >
+      <img src={BACKGROUND} alt="background" className="fixed -z-10 " />
       <GptSearchBar />
       <GptMovieSuggestions />
     </div>
